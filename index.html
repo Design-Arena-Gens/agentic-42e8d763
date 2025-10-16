@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قابلیت‌های Agent - معرفی هوش مصنوعی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .intro h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .intro p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .capability-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: white;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .capability-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.8em;
+        }
+
+        .capability-card ul {
+            list-style: none;
+            padding-right: 20px;
+        }
+
+        .capability-card li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 25px;
+        }
+
+        .capability-card li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #4ade80;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .examples {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .examples h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .example-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-right: 4px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .example-item strong {
+            color: #764ba2;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .tech-stack {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tech-stack h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .tech-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.3);
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        .demo-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .capabilities {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Agent - دستیار هوشمند شما</h1>
+            <p class="subtitle">یک هوش مصنوعی قدرتمند برای کمک به برنامه‌نویسی و توسعه نرم‌افزار</p>
+        </header>
+
+        <div class="content">
+            <div class="intro">
+                <h2>Agent چیست؟</h2>
+                <p>
+                    Agent یک دستیار هوش مصنوعی پیشرفته است که با استفاده از مدل Claude ساخته شده است. این ابزار می‌تواند به شما در طیف گسترده‌ای از وظایف برنامه‌نویسی و توسعه نرم‌افزار کمک کند - از نوشتن کد گرفته تا اشکال‌زدایی، طراحی سیستم، و مستندسازی.
+                </p>
+            </div>
+
+            <h2 style="color: #667eea; margin-bottom: 25px; font-size: 2em; text-align: center;">قابلیت‌های کلیدی</h2>
+
+            <div class="capabilities">
+                <div class="capability-card">
+                    <h3><span class="icon">💻</span> توسعه نرم‌افزار</h3>
+                    <ul>
+                        <li>نوشتن کد در زبان‌های مختلف</li>
+                        <li>ایجاد پروژه‌های کامل</li>
+                        <li>رفع باگ و اشکال‌زدایی</li>
+                        <li>بهینه‌سازی کد</li>
+                        <li>بازآرایی (Refactoring)</li>
+                    </ul>
+                </div>
+
+                <div class="capability-card">
+                    <h3><span class="icon">🔍</span> تحلیل و جستجو</h3>
+                    <ul>
+                        <li>جستجو در فایل‌های پروژه</li>
+                        <li>تحلیل کد موجود</li>
+                        <li>پیدا کردن الگوها</li>
+                        <li>بررسی وابستگی‌ها</li>
+                        <li>درک ساختار پروژه</li>
+                    </ul>
+                </div>
+
+                <div class="capability-card">
+                    <h3><span class="icon">🛠️</span> ابزارها و اتوماسیون</h3>
+                    <ul>
+                        <li>اجرای دستورات ترمینال</li>
+                        <li>مدیریت Git</li>
+                        <li>نصب وابستگی‌ها</li>
+                        <li>اجرای تست‌ها</li>
+                        <li>Deploy کردن پروژه‌ها</li>
+                    </ul>
+                </div>
+
+                <div class="capability-card">
+                    <h3><span class="icon">🌐</span> توسعه وب</h3>
+                    <ul>
+                        <li>ساخت وب‌سایت و اپلیکیشن</li>
+                        <li>کار با React، Next.js، Vue</li>
+                        <li>طراحی رابط کاربری</li>
+                        <li>ساخت API</li>
+                        <li>مدیریت پایگاه داده</li>
+                    </ul>
+                </div>
+
+                <div class="capability-card">
+                    <h3><span class="icon">📚</span> مستندسازی</h3>
+                    <ul>
+                        <li>نوشتن README</li>
+                        <li>ایجاد مستندات API</li>
+                        <li>کامنت‌گذاری کد</li>
+                        <li>راهنمای استفاده</li>
+                        <li>توضیح کد پیچیده</li>
+                    </ul>
+                </div>
+
+                <div class="capability-card">
+                    <h3><span class="icon">🎨</span> طراحی و UI/UX</h3>
+                    <ul>
+                        <li>طراحی رابط کاربری</li>
+                        <li>استایل‌دهی با CSS</li>
+                        <li>انیمیشن و افکت‌ها</li>
+                        <li>طراحی واکنش‌گرا</li>
+                        <li>بهبود تجربه کاربری</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="examples">
+                <h2>مثال‌هایی از کارهایی که می‌تواند انجام دهد:</h2>
+
+                <div class="example-item">
+                    <strong>ساخت وب‌سایت کامل:</strong>
+                    "یک وب‌سایت فروشگاهی با React بساز که شامل سبد خرید، پرداخت و مدیریت محصولات باشد"
+                </div>
+
+                <div class="example-item">
+                    <strong>رفع مشکل:</strong>
+                    "این ارور را برطرف کن: TypeError: Cannot read property 'map' of undefined"
+                </div>
+
+                <div class="example-item">
+                    <strong>بهینه‌سازی:</strong>
+                    "این تابع را بهینه کن تا سریع‌تر اجرا شود"
+                </div>
+
+                <div class="example-item">
+                    <strong>ایجاد API:</strong>
+                    "یک REST API با Node.js برای مدیریت کاربران بساز"
+                </div>
+
+                <div class="example-item">
+                    <strong>مستندسازی:</strong>
+                    "برای این پروژه یک README کامل بنویس"
+                </div>
+
+                <div class="example-item">
+                    <strong>استقرار پروژه:</strong>
+                    "این پروژه را روی Vercel یا Netlify deploy کن"
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <h2>تکنولوژی‌هایی که پشتیبانی می‌کند:</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">JavaScript</div>
+                    <div class="tech-item">TypeScript</div>
+                    <div class="tech-item">React</div>
+                    <div class="tech-item">Next.js</div>
+                    <div class="tech-item">Vue.js</div>
+                    <div class="tech-item">Node.js</div>
+                    <div class="tech-item">Python</div>
+                    <div class="tech-item">HTML/CSS</div>
+                    <div class="tech-item">Tailwind CSS</div>
+                    <div class="tech-item">Git</div>
+                    <div class="tech-item">Docker</div>
+                    <div class="tech-item">SQL</div>
+                    <div class="tech-item">MongoDB</div>
+                    <div class="tech-item">REST API</div>
+                    <div class="tech-item">GraphQL</div>
+                    <div class="tech-item">و خیلی بیشتر...</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding: 40px 0;">
+                <h2 style="color: #667eea; margin-bottom: 20px;">چطور استفاده کنم؟</h2>
+                <p style="font-size: 1.1em; margin-bottom: 20px; color: #555;">
+                    کافیست درخواست خود را به زبان طبیعی (فارسی یا انگلیسی) بنویسید و Agent به شما کمک می‌کند!
+                </p>
+                <a href="#" class="demo-button" onclick="alert('Agent در حال حاضر در محیط شما فعال است! فقط کافیست سوال یا درخواست خود را مطرح کنید.'); return false;">
+                    شروع کنید →
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>ساخته شده با 💜 توسط Claude Agent | Powered by Anthropic Claude</p>
+            <p style="margin-top: 10px; font-size: 0.85em; opacity: 0.8;">
+                این صفحه برای نمایش قابلیت‌های Agent ساخته شده است
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
